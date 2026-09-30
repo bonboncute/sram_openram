@@ -1,0 +1,13 @@
+read_verilog rtl/*.v
+read_verilog out/sram_1kb_32b.v
+blackbox sram_1kb_32b
+
+read_liberty -lib tech/Nangate45_typ.lib   # đổi thành stdcell lib bạn có
+hierarchy -top mem_ctrl
+
+proc; flatten; opt; fsm; opt; memory; opt
+techmap; opt
+abc -liberty tech/Nangate45_typ.lib
+opt_clean -purge
+
+write_verilog build/mem_ctrl_syn.v
