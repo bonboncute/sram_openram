@@ -1,0 +1,497 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Executing script file `scripts/synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/mem_ctrl.v
+Parsing Verilog input from `rtl/mem_ctrl.v' to AST representation.
+Generating RTLIL representation for module `\mem_ctrl'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/sram_behav.v
+Parsing Verilog input from `rtl/sram_behav.v' to AST representation.
+Generating RTLIL representation for module `\sram_behav'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: out/sram_1kb_32b.v
+Parsing Verilog input from `out/sram_1kb_32b.v' to AST representation.
+Generating RTLIL representation for module `\sram_1kb_32b'.
+Successfully finished Verilog frontend.
+
+4. Executing Liberty frontend: tech/Nangate45_typ.lib
+Imported 135 cell types from liberty file.
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+
+5.1. Analyzing design hierarchy..
+Top module:  \mem_ctrl
+
+5.2. Analyzing design hierarchy..
+Top module:  \mem_ctrl
+Removing unused module `\sram_behav'.
+Removed 1 unused modules.
+
+6. Executing PROC pass (convert processes to netlists).
+
+6.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+6.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/mem_ctrl.v:25$1 in module mem_ctrl.
+Removed a total of 0 dead cases.
+
+6.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 0 assignments to connections.
+
+6.4. Executing PROC_INIT pass (extract init attributes).
+
+6.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rstn in `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+
+6.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+6.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+     1/7: $0\s_we[0:0]
+     2/7: $0\s_cs[0:0]
+     3/7: $0\pending[0:0]
+     4/7: $0\pready[0:0]
+     5/7: $0\s_din[31:0]
+     6/7: $0\s_addr[7:0]
+     7/7: $0\prdata[31:0]
+
+6.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+6.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\mem_ctrl.\prdata' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$54' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\pready' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$55' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\s_cs' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$56' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\s_we' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$57' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\s_addr' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$58' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\s_din' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$59' with positive edge clock and negative level reset.
+Creating register for signal `\mem_ctrl.\pending' using process `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+  created $adff cell `$procdff$60' with positive edge clock and negative level reset.
+
+6.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+6.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+Removing empty process `mem_ctrl.$proc$rtl/mem_ctrl.v:25$1'.
+Cleaned up 2 empty switches.
+
+6.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+7. Executing FLATTEN pass (flatten design).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$59 ($adff) from module mem_ctrl (D = \pwdata, Q = \s_din).
+Adding EN signal on $procdff$54 ($adff) from module mem_ctrl (D = \s_dout, Q = \prdata).
+Adding EN signal on $procdff$58 ($adff) from module mem_ctrl (D = \paddr, Q = \s_addr).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+Removed 4 unused cells and 18 unused wires.
+<suppressed ~5 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+8.16. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing FSM pass (extract and optimize FSM).
+
+9.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+10.9. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing MEMORY pass.
+
+11.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+11.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+11.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+11.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+11.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+11.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+11.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+11.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+11.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+11.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+11.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+12.9. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing TECHMAP pass (map to technology primitives).
+
+13.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+13.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $mux.
+No more expansions possible.
+<suppressed ~82 debug messages>
+
+14. Executing OPT pass (performing simple optimizations).
+
+14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+<suppressed ~1 debug messages>
+
+14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mem_ctrl..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mem_ctrl.
+Performed a total of 0 changes.
+
+14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mem_ctrl'.
+Removed a total of 0 cells.
+
+14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+
+14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mem_ctrl.
+
+14.16. Finished OPT passes. (There is nothing left to do.)
+
+15. Executing ABC pass (technology mapping using ABC).
+
+15.1. Extracting gate netlist of module `\mem_ctrl' to `<abc-temp-dir>/input.blif'..
+Extracted 2 gates and 6 wires to a netlist network with 3 inputs and 2 outputs.
+
+15.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/cuong/OpenRAM/thesis-sram/tech/Nangate45_typ.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.03 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATETST_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X1" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X2" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X4" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "CLKGATE_X8" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "TAPCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Library "NangateOpenCellLibrary" from "/home/cuong/OpenRAM/thesis-sram/tech/Nangate45_typ.lib" has 90 cells (35 skipped: 21 seq; 6 tri-state; 8 no func; 10 dont_use).  Time =     0.05 sec
+ABC: Memory =   11.38 MB. Time =     0.05 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FA_X1").
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+15.1.2. Re-integrating ABC results.
+ABC RESULTS:           AND2_X1 cells:        1
+ABC RESULTS:           AND3_X1 cells:        1
+ABC RESULTS:        internal signals:        1
+ABC RESULTS:           input signals:        3
+ABC RESULTS:          output signals:        2
+Removing temp directory.
+
+16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mem_ctrl..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~2 debug messages>
+
+17. Executing Verilog backend.
+
+17.1. Executing BMUXMAP pass.
+
+17.2. Executing DEMUXMAP pass.
+Dumping module `\mem_ctrl'.
+
+End of script. Logfile hash: 2a31a711c0, CPU: user 0.12s system 0.01s, MEM: 27.86 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 44% 1x abc (0 sec), 28% 2x read_liberty (0 sec), ...
