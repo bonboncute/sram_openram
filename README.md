@@ -32,7 +32,7 @@ This project demonstrates a complete digital design flow on open-source tools:
   │ psel, penable │          │                   │ s_cs   │                 │
   │ pwrite, paddr │ ───────► │  APB-lite slave   │ s_we   │  sram_1kb_32b   │
   │ pwdata        │          │  → native SRAM    │ s_addr │  (256×32, RW)   │
-  │               │ ◄─────── │    interface       │ s_din  │  OpenRAM-       │
+  │               │ ◄─────── │    interface      │ s_din  │  OpenRAM-       │
   │ prdata, pready│          │                   │ s_dout │  generated      │
   └───────────────┘          └──────────────────┘ ◄────── └─────────────────┘
 ```
@@ -69,10 +69,10 @@ Constraint: 100 MHz clock (10 ns period), 1 ns I/O delay.
 
 | Path | Type | Slack | Result |
 |---|---|---|---|
-| Internal reconvergent path | min | 0.13 ns | ✅ MET |
-| `psel` → internal FF | max | 8.68 ns | ✅ MET |
-| `rstn` → FF (removal) | async min | 0.82 ns | ✅ MET |
-| `rstn` → FF (recovery) | async max | 9.05 ns | ✅ MET |
+| Internal reconvergent path | min | 0.13 ns |  MET |
+| `psel` → internal FF | max | 8.68 ns |  MET |
+| `rstn` → FF (removal) | async min | 0.82 ns |  MET |
+| `rstn` → FF (recovery) | async max | 9.05 ns |  MET |
 
 **TNS = 0.00 ns** — zero timing violations across all path groups (setup, hold, and asynchronous reset removal/recovery).
 
@@ -119,6 +119,3 @@ yosys synth/synth.ys
 sta sta/run_sta.tcl
 ```
 
-## Author
-
-Nguyễn Phú Cường — Computer Engineering, applying for Physical Design / Hardware Engineering roles.
