@@ -1,0 +1,9 @@
+iverilog -g2012 -o out/simv rtl/sram_behav.v rtl/mem_ctrl.v tb/tb_top.v
+out/simv
+VCD info: dumpfile out/dump.vcd opened for output.
+OK 0 = a5a50000
+OK 1 = a5a50001
+OK 2 = a5a50002
+OK 3 = a5a50003
+tb/tb_top.v:63: $finish called at 300000 (1ps)
+VCD: out/dump.vcd
